@@ -1,0 +1,88 @@
+<!-- Index.html -->
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>FurnitureStore - Главная</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+        background-color: #ffffff; /* White background */
+        font-family: Arial, sans-serif;
+        color: #212529; /* Dark grey */
+        margin: 0;
+        padding: 0;
+    }
+    .header-banner {
+        background-color: #3498db; /* Blue */
+        color: white;
+        padding: 50px 0;
+        text-align: center;
+    }
+    .header-banner h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
+    .header-banner p {
+        font-size: 1.2em;
+    }
+    .features {
+        padding: 50px 20px;
+        text-align: center;
+    }
+    .features h2 {
+        margin-bottom: 30px;
+        color: #2c3e50; /* Dark blue */
+    }
+    .feature-item {
+        margin-bottom: 30px;
+    }
+    .footer {
+        background-color: #2c3e50; /* Dark blue */
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    .btn-primary {
+        background-color: #27ae60; /* Green */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        text-decoration: none;
+        color: white;
+    }
+    .btn-primary:hover {
+        background-color: #1e8449; /* Darker green */
+    }
+  </style>
+</head>
+<body>
+<div th:insert="blocks/header.html"></div>
+<div class="header-banner">
+  <h1>Добро пожаловать в FurnitureStore</h1>
+  <p>Лучшее место для покупки качественной мебели</p>
+  <a href="/furnitures/all" class="btn btn-primary">Просмотреть мебель</a>
+</div>
+<div class="features">
+  <h2>Наши преимущества</h2>
+  <div class="row">
+    <div class="col-md-4 feature-item">
+      <h3>Широкий ассортимент</h3>
+      <p>Предлагаем разнообразные типы мебели для любого интерьера.</p>
+    </div>
+    <div class="col-md-4 feature-item">
+      <h3>Качественные материалы</h3>
+      <p>Используем только проверенные и долговечные материалы.</p>
+    </div>
+    <div class="col-md-4 feature-item">
+      <h3>Быстрая доставка</h3>
+      <p>Организуем доставку в кратчайшие сроки по всей стране.</p>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <p>&copy; 2024 FurnitureStore. Все права защищены.</p>
+</div>
+</body>
+</html>

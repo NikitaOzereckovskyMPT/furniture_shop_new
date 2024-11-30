@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<header class="p-3 bg-dark text-white" th:fragment="header">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <!-- Меню для менеджера -->
+        <li sec:authorize="hasAuthority('MANAGER')">
+          <a href="/delivery-persons/all" class="nav-link px-2 text-white">Сотрудники доставки</a>
+        </li>
+        <li sec:authorize="hasAuthority('MANAGER')">
+          <a href="/deliveries/all" class="nav-link px-2 text-white">Доставки</a>
+        </li>
+        <li sec:authorize="hasAuthority('MANAGER')">
+          <a href="/orders/all" class="nav-link px-2 text-white">Заказы</a>
+        </li>
+        <li sec:authorize="hasAuthority('MANAGER')">
+          <a href="/payments/all" class="nav-link px-2 text-white">Оплаты</a>
+        </li>
+      </ul>
+      <div class="text-end">
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="submit" class="btn btn-warning">Выход</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+</body>
+</html>

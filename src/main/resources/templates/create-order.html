@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Создание заказа</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{blocks/header :: header}"></div>
+<div class="container">
+  <h1>Создание нового заказа</h1>
+
+  <form th:action="@{/customer/orders/create}" method="post" th:object="${order}">
+    <!-- Выбор мебели -->
+    <div class="mb-3">
+      <label class="form-label">Выберите мебель:</label>
+      <div th:each="furniture : ${furnitureList}" class="form-check">
+        <input type="checkbox"
+               th:field="*{selectedFurniture}"
+               th:value="${furniture.id}"
+               class="form-check-input">
+        <label class="form-check-label"
+               th:text="${furniture.name + ' - ' + furniture.price}">
+        </label>
+      </div>
+    </div>
+
+    <!-- Адрес доставки -->
+    <div class="mb-3">
+      <label for="address" class="form-label">Адрес доставки:</label>
+      <input type="text"
+             class="form-control"
+             id="address"
+             th:field="*{address}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Создать заказ</button>
+    <a href="/customer/orders/my" class="btn btn-secondary">Отмена</a>
+  </form>
+</div>
+</body>
+</html>

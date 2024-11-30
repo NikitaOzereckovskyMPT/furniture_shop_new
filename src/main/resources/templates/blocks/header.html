@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header class="p-3 bg-dark text-dark" th:fragment="header">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <!-- Меню для администратора -->
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a href="/admin/users" class="nav-link px-2 text-dark">Пользователи</a>
+                </li>
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a href="/furnitureTypes/all" class="nav-link px-2 text-dark">Типы мебели</a>
+                </li>
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a href="/furnitures/all" class="nav-link px-2 text-dark">Мебель</a>
+                </li>
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a href="/materials/all" class="nav-link px-2 text-dark">Материалы</a>
+                </li>
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a href="/orders/all" class="nav-link px-2 text-dark">Заказы</a>
+                </li>
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a href="/payments/all" class="nav-link px-2 text-dark">Оплаты</a>
+                </li>
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a href="/deliveries/all" class="nav-link px-2 text-dark">Доставки</a>
+                </li>
+            </ul>
+            <div class="text-end">
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-warning">Выход</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+</html>

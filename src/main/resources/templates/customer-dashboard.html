@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Личный кабинет</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
+    .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }
+    .orders-section {
+        margin-top: 30px;
+    }
+    .welcome-block {
+        background-color: #e3f2fd;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="~{blocks/header :: header}"></div>
+
+<div class="container">
+  <div class="welcome-block">
+    <h2>Добро пожаловать, <span th:text="${#authentication.name}"></span>!</h2>
+    <p>Здесь вы можете просматривать свои заказы и управлять ими.</p>
+  </div>
+
+  <div class="orders-section">
+    <h3>Ваши последние заказы</h3>
+
+    <div th:if="${latestOrders.empty}" class="alert alert-info">
+      У вас пока нет заказов.
+    </div>
+
+    <div th:if="${!latestOrders.empty}" class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Номер заказа</th>
+          <th>Дата</th>
+          <th>Статус</th>
+          <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${latestOrders}">
+          <td th:text="${order.id}"></td>
+          <td th:text="${#temporals.format(order.createdAt, 'dd.MM.yyyy')}"></td>
+          <td>
+                                <span th:text="${order.status.displayName}"
+                                      th:class="${'badge ' +
+                                      (order.status.name() == 'NEW' ? 'bg-primary' :
+                                       order.status.name() == 'PROCESSING' ? 'bg-info' :
+                                       order.status.name() == 'PAID' ? 'bg-success' :
+                                       order.status.name() == 'SHIPPING' ? 'bg-warning' :
+                                       order.status.name() == 'COMPLETED' ? 'bg-success' : 'bg-danger')}">
+                                </span>
+          </td>
+          <td>
+            <a th:href="@{/customer/orders/{id}(id=${order.id})}"
+               class="btn btn-info btn-sm">Подробнее</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-4">
+      <a href="/customer/orders/create" class="btn btn-primary">Создать новый заказ</a>
+      <a href="/customer/catalog" class="btn btn-secondary">Перейти в каталог</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали заказа</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light grey */
+            font-family: Arial, sans-serif;
+            color: #212529; /* Dark grey */
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff; /* White background */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50; /* Dark blue */
+            margin-bottom: 20px;
+        }
+        .btn-warning {
+            background-color: #f39c12; /* Orange */
+            border: none;
+        }
+        .btn-warning:hover {
+            background-color: #d35400; /* Darker orange */
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{blocks/header :: header}"></div>
+<div class="container">
+    <h1>Детали заказа</h1>
+    <p><strong>Адрес:</strong> <span th:text="${order.address}"></span></p>
+    <p><strong>Клиент:</strong> <span th:text="${order.customer.name}"></span></p>
+    <p><strong>Доставка:</strong> <span th:text="${order.delivery != null ? order.delivery.status + ' на ' + order.delivery.date : 'Не доставлено'}"></span></p>
+    <p><strong>Дата создания:</strong> <span th:text="${order.createdAt}"></span></p>
+    <p><strong>Статус:</strong> <span th:text="${order.status}"></span></p>
+
+    <h3>Мебель:</h3>
+    <ul>
+        <li th:each="furnitureClient : ${order.furnitureClients}">
+      <span th:text="${furnitureClient.firstFurniture + (furnitureClient.secondFurniture != null ? ', ' + furnitureClient.secondFurniture : '') +
+                       (furnitureClient.thirdFurniture != null ? ', ' + furnitureClient.thirdFurniture : '') +
+                       (furnitureClient.fourthFurniture != null ? ', ' + furnitureClient.fourthFurniture : '')}"></span>
+            <span th:if="${furnitureClient.packaging != null}" th:text="' (Упаковка: ' + ${furnitureClient.packaging} + ')'"></span>
+        </li>
+    </ul>
+
+    <a th:href="@{/orders/all}" class="btn btn-warning">Назад к списку заказов</a>
+</div>
+</body>
+</html>

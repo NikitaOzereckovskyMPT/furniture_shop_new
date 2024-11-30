@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Подробная информация об элементе заказа</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .details p {
+        margin-bottom: 10px;
+    }
+    .button-group {
+        margin-top: 20px;
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div th:insert="blocks/header2.html"></div>
+<div class="container">
+  <h1>Информация об элементе заказа</h1>
+
+  <div class="details">
+    <p><strong>Первый предмет:</strong> <span th:text="${furnitureClient.firstFurniture}"></span></p>
+    <p><strong>Второй предмет:</strong> <span th:text="${furnitureClient.secondFurniture}"></span></p>
+    <p><strong>Третий предмет:</strong> <span th:text="${furnitureClient.thirdFurniture}"></span></p>
+    <p><strong>Четвертый предмет:</strong> <span th:text="${furnitureClient.fourthFurniture}"></span></p>
+    <p><strong>Упаковка:</strong> <span th:text="${furnitureClient.packaging}"></span></p>
+    <p><strong>Заказ:</strong> <span th:text="${'#' + furnitureClient.order.id}"></span></p>
+    <p><strong>Клиент:</strong> <span th:text="${furnitureClient.customer.name}"></span></p>
+  </div>
+
+  <div class="button-group">
+    <a th:href="@{/furnitureClients/{id}/edit(id=${furnitureClient.id})}" class="btn btn-warning">Редактировать</a>
+    <a href="/furnitureClients/all" class="btn btn-secondary">Назад</a>
+    <form th:action="@{/furnitureClients/{id}/delete(id=${furnitureClient.id})}"
+          method="post"
+          style="display: inline;">
+      <button type="submit" class="btn btn-danger"
+              onclick="return confirm('Вы уверены, что хотите удалить этот элемент?')">
+        Удалить
+      </button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

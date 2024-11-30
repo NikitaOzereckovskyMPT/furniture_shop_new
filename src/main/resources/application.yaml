@@ -1,0 +1,35 @@
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  config:
+    name: furniture_shop
+  datasource:
+    url: jdbc:postgresql://localhost:5432/furniture_shop_db
+    username: postgres
+    password: 1
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        enable_lazy_load_no_trans: true
+        event:
+          merge:
+            entity_copy_observer: allow
+    open-in-view: true
+
+server:
+  port: 7654
+
+# Настройки безопасности
+security:
+  user:
+    name: admin
+    password: admin
